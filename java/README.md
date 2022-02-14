@@ -193,7 +193,3 @@ LinkedHashSet.readObject()
 - 了解缩小反序列化Payload的手段吗（★★★）
 
 首先最容易的方案是使用Javassist生成字节码，这种情况下生成的字节码较小。进一步可以用ASM删除所有的LineNumber指令，可以更小一步。最终手段可以分块发送多个Payload最后合并再用URLClassLoader加载
-
-
-
-- 待师傅们补充

