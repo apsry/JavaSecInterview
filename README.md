@@ -26,4 +26,21 @@
 
 [Log4j2组件相关的安全问题 - 7个](https://github.com/4ra1n/JavaSecInterview/tree/master/log4j2)
 
+[Spring框架相关的安全问题 - 12个](https://github.com/4ra1n/JavaSecInterview/tree/master/spring)
+
 [内存马专题 - 7个](https://github.com/4ra1n/JavaSecInterview/tree/master/memshell)
+
+## 参考
+
+https://github.com/LandGrey/SpringBootVulExploit
+
+https://github.com/feihong-cs/Java-Rce-Echo/
+
+https://threedr3am.github.io/
+
+https://xz.aliyun.com/t/7740
+
+https://xz.aliyun.com/t/7307
+
+
+
