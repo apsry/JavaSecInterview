@@ -46,6 +46,12 @@ Spring内存马有：Controller型，Interceptor型
 
 
 
+- 内存马持久化写字节码方式除了`@Filter`标签还有什么办法
+
+使用`ServletContainerInitializer`用于在容器启动阶段注册三大组件，取代`web.xml`配置。其中`onStartup`方法会在`Tomcat`中间件重启加载当前`webapp`会优先执行这个方法。通过改方法，我们可以注册一个`webshell`的`filter`
+
+
+
 - Java Agent内存马的查杀（★★★）
 
 网上师傅提到用`sa-jdi.jar`工具来做，这是一个JVM性能检测工具，可以dump出JVM中所有的Class文件，尤其重点关注`HttpServletr.service`方法，这是Agent内存马常用的手段
