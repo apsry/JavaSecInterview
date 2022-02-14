@@ -18,7 +18,7 @@
 
 ## 分类
 
-[Java本身的安全问题 - 12个](https://github.com/4ra1n/JavaSecInterview/tree/master/java)
+[Java本身的安全问题 - 15个](https://github.com/4ra1n/JavaSecInterview/tree/master/java)
 
 [Shiro框架相关的安全问题 - 7个](https://github.com/4ra1n/JavaSecInterview/tree/master/shiro)
 
