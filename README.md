@@ -22,6 +22,6 @@
 
 [Shiro框架相关的安全问题 - 7个](https://github.com/4ra1n/JavaSecInterview/tree/master/shiro)
 
-[Log4j2组件相关的安全问题 - 6个](https://github.com/4ra1n/JavaSecInterview/tree/master/log4j2)
+[Log4j2组件相关的安全问题 - 7个](https://github.com/4ra1n/JavaSecInterview/tree/master/log4j2)
 
-[内存马专题 - 6个](https://github.com/4ra1n/JavaSecInterview/tree/master/memshell)
+[内存马专题 - 7个](https://github.com/4ra1n/JavaSecInterview/tree/master/memshell)

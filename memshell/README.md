@@ -49,3 +49,11 @@ Spring内存马有：Controller型，Interceptor型
 - Java Agent内存马的查杀（★★★）
 
 网上师傅提到用`sa-jdi.jar`工具来做，这是一个JVM性能检测工具，可以dump出JVM中所有的Class文件，尤其重点关注`HttpServletr.service`方法，这是Agent内存马常用的手段
+
+
+
+- 如果有一个陌生的框架你如何挖内存马（★★★）
+
+核心是找到类似`Tomcat`和`Spring`中类似`Context`的对象，然后尝试从其中获取`request`和`response`对象以实现内存马的功能。可以从常见的类名称入手：Requst、ServletRequest、RequstGroup、RequestInfo、RequestGroupInfo等等。可以参考c0ny1师傅的`java-object-searcher`项目，半自动搜索`request`对象
+
+
