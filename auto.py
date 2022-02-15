@@ -3,6 +3,7 @@ index = open("README.md", "r+", encoding="utf-8");
 lines = index.readlines()
 
 all = 0
+all_index = 0
 for i in range (0,len(lines)):
     if lines[i].startswith("["):
         line = lines[i]
@@ -18,8 +19,12 @@ for i in range (0,len(lines)):
         s = line.split("个]")[1]
         all += total
         lines[i] = p + "- " + str(total) + "个]" + s
+        print(suffix + ":" + str(total))
+    if lines[i].startswith("当前问题总数"):
+        all_index = i
 
+print("total:" + str(all))
+lines[all_index] = "当前问题总数："+ str(all) + "\n"
 index.seek(0)
 index.truncate()
 index.writelines(lines)
-print(all)
