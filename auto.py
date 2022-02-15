@@ -2,6 +2,7 @@
 index = open("README.md", "r+", encoding="utf-8");
 lines = index.readlines()
 
+all = 0
 for i in range (0,len(lines)):
     if lines[i].startswith("["):
         line = lines[i]
@@ -15,8 +16,10 @@ for i in range (0,len(lines)):
                 total = total + 1
         p = line.split("-")[0]
         s = line.split("个]")[1]
+        all += total
         lines[i] = p + "- " + str(total) + "个]" + s
 
 index.seek(0)
 index.truncate()
 index.writelines(lines)
+print(all)
