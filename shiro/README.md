@@ -1,5 +1,11 @@
 ## Shiro
 
+- 怎样检测目标框架使用了Shiro（★)
+
+直接看请求响应中是否有`rememberMe=deleteMe`这样的`Cookie`
+
+
+
 - Shiro反序列化怎么检测key（★★★）
 
 实例化一个`SimplePrincipalCollection`遍历key列表进行AES加密，然后加入到`Cookie`的`rememberMe`字段中发送，如果响应头的`Set-Cookie`字段包含`rememberMe=deleteMe`说明不是该密钥，如果什么都不返回，说明当前key是正确的key。实际中可能需要多次这样的请求来确认key
