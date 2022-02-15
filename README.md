@@ -20,9 +20,9 @@
 
 [Java本身的安全问题 - 15个](https://github.com/4ra1n/JavaSecInterview/tree/master/java)
 
-[Shiro框架相关的安全问题 - 7个](https://github.com/4ra1n/JavaSecInterview/tree/master/shiro)
+[Shiro框架相关的安全问题 - 8个](https://github.com/4ra1n/JavaSecInterview/tree/master/shiro)
 
-[Fastjson组件相关的安全问题 - 6个](https://github.com/4ra1n/JavaSecInterview/tree/master/fastjson)
+[Fastjson组件相关的安全问题 - 8个](https://github.com/4ra1n/JavaSecInterview/tree/master/fastjson)
 
 [Log4j2组件相关的安全问题 - 7个](https://github.com/4ra1n/JavaSecInterview/tree/master/log4j2)
 
