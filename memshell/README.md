@@ -14,9 +14,11 @@ Java Agent内存马：这种方式不仅限于`Tomcat`或`Spring`
 
 直接能想到的办法是利用Java Agent遍历所有JVM中的class，判断是否是内存马
 
-例如使用阿里的arthas分析，查看是否存在恶意的类名，然后删除
+例如使用阿里的arthas分析，根据继承实现类黑名单，注解包名类名等黑名单来做
 
-或者使用c0ny1师傅的java-memshell-scanner项目，从Tomcat API角度删除
+例如`LandGrey`师傅的`copagent`项目，根据黑名单和风险注解作为依据，
+
+或者使用c0ny1师傅的`java-memshell-scanner`项目，从Tomcat API角度删除
 
 
 
@@ -56,6 +58,18 @@ Java Agent内存马：这种方式不仅限于`Tomcat`或`Spring`
 ### Java Agent内存马的查杀（★★★）
 
 网上师傅提到用`sa-jdi.jar`工具来做，这是一个JVM性能检测工具，可以dump出JVM中可能有问题的Class文件，尤其重点关注`HttpServletr.service`方法，这是Agent内存马常用的手段
+
+
+
+### Java Agent内存马的查杀的难点是什么（★★★★）
+
+JVMTI有
+
+一般Agent内存马会调用`Java Agent`提供的`redefineClass`方法加入内存马
+
+如果想检测，拿到的字节码并不是修改过的字节码，而是原始字节码，因此无法判断某个类是否合法
+
+准确描述：无法获取到被`redefineClass`修改后的字节码，只能获取到被`retransformClass`修改后的字节码
 
 
 
