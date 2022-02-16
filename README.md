@@ -18,9 +18,9 @@
 
 ## 分类
 
-当前问题总数：62
+当前问题总数：67
 
-[Java本身的安全问题 - 15个](https://github.com/4ra1n/JavaSecInterview/tree/master/java)
+[Java本身的安全问题 - 16个](https://github.com/4ra1n/JavaSecInterview/tree/master/java)
 
 [Shiro框架相关的安全问题 - 8个](https://github.com/4ra1n/JavaSecInterview/tree/master/shiro)
 
@@ -28,7 +28,7 @@
 
 [Log4j2组件相关的安全问题 - 7个](https://github.com/4ra1n/JavaSecInterview/tree/master/log4j2)
 
-[Spring框架相关的安全问题 - 12个](https://github.com/4ra1n/JavaSecInterview/tree/master/spring)
+[Spring框架相关的安全问题 - 16个](https://github.com/4ra1n/JavaSecInterview/tree/master/spring)
 
 [内存马专题 - 8个](https://github.com/4ra1n/JavaSecInterview/tree/master/memshell)
 

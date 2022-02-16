@@ -6,6 +6,38 @@ Spring处理参数值出错时会将参数中`${}`中的内容当作`SPEL`解析
 
 
 
+- 谈谈Spring Data REST SPEL RCE（★★）
+
+当使用`JSON PATCH`对数据修改时，传入的`PATH`参数会解析`SPEL`
+
+
+
+- 谈谈Spring Web Flow SPEL RCE（★★）
+
+在`Model`的数据绑定上存在漏洞，但漏洞出发条件比较苛刻
+
+由于没有明确指定相关`Model`的具体属性，导致从表单可以提交恶意的表达式`SPEL`被执行
+
+
+
+- 谈谈Spring Messaging SPEL RCE（★★）
+
+其中的`STOMP`模块发送订阅命令时，支持选择器标头，该选择器充当基于内容路由的筛选器
+
+这个筛选器`selector`属性的值会解析`SPEL`导致RCE
+
+
+
+- 谈谈Spring Data Commons SPEL RCE（★★）
+
+请求参数中如何包含`SPEL`会被解析，参考下方Payload
+
+```text
+username[#this.getClass().forName("java.lang.Runtime").getRuntime().exec("calc.exe")]
+```
+
+
+
 - 谈谈SpringCloud SnameYAML RCE（★★★）
 
 该漏洞的利用条件是可出网，可以`POST`访问`/env`接口设置属性，且可以访问`/refresh`刷新配置
