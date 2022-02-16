@@ -226,7 +226,7 @@ Y4er师傅提到的自定义类加载器配合RMI的一种方式
 
 
 
-- 是否了解JDBC Connection URL攻击
+- 是否了解JDBC Connection URL攻击（★★★）
 
 果我们可以控制`JDBC URI`就可将`JDBC`连接地址指向攻击者事先准备好的恶意服务器，这个服务器可以返回恶意的序列化数据
 

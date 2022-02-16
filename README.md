@@ -10,15 +10,17 @@
 
 计划定期更新，从基础到各种实战问题，打造齐全的Java安全面试题库（包含问题和详细的答案）
 
+作者技术水平有限，难免有错误之处，欢迎师傅们提出ISSUE和PR
+
+## 难度
+
 最低难度★   最高难度★★★★★
 
-
-
-作者技术水平有限，难免有错误之处，欢迎师傅们提出ISSUE和PR
+个人认为安服崽需要掌握★-★★难度的问题，想进大厂或实验室至少需要全部掌握
 
 ## 分类
 
-当前问题总数：75
+当前问题总数：78
 
 [Java本身的安全问题 - 16个](https://github.com/4ra1n/JavaSecInterview/tree/master/java)
 
@@ -26,7 +28,7 @@
 
 [Fastjson组件相关的安全问题 - 12个](https://github.com/4ra1n/JavaSecInterview/tree/master/fastjson)
 
-[Log4j2组件相关的安全问题 - 7个](https://github.com/4ra1n/JavaSecInterview/tree/master/log4j2)
+[Log4j2组件相关的安全问题 - 10个](https://github.com/4ra1n/JavaSecInterview/tree/master/log4j2)
 
 [Spring框架相关的安全问题 - 16个](https://github.com/4ra1n/JavaSecInterview/tree/master/spring)
 

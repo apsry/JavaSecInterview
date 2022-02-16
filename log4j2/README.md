@@ -6,6 +6,32 @@
 
 
 
+- Log4j2漏洞的黑盒检测（★）
+
+由于该漏洞的特性，必须要出网才可以检测，例如`dnslog`的方式
+
+在内网中也可不使用`dnslog`而是自行实现伪`JDNI/LDAP`的服务端用于探测
+
+
+
+- Log4j2漏洞的白盒检测（★）
+
+检查`pom.xml`或`gradle`中的依赖，是否存在`log4j2-api`和`log4j2-core`小于`2.15.0`则存在漏洞
+
+
+
+- Log4j2的紧急修复手段（★★）
+
+在JVM参数中添加`-Dlog4j2.formatMsgNoLookups=true`
+
+系统环境变量中将`LOG4J_FORMAT_MSG_NO_LOOKUPS`设置为`true`
+
+创建`log4j2.component.properties`文件并增加配置`log4j2.formatMsgNoLookups=true`
+
+不重启应用情况下的修复手段参考另一个问题
+
+
+
 - 知道Log4j2 2.15.0 RC1修复的绕过吗（★★★）
 
 修复内容限制了协议和HOST以及类型，其中类型这个东西其实没用，协议的限制中包含了`LDAP`等于没限制。重点在于HOST的限制，只允许本地localhost和127.0.0.1等IP。但这里出现的问题是，加入了限制但没有捕获异常，如果产生异常会继续`lookup`所以如果在URL中加入一些特殊字符，例如空格，即可导致异常绕过HOSOT限制，然后`lookup`触发RCE
