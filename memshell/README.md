@@ -1,6 +1,6 @@
 ## 内存马
 
-- Tomcat和Spring内存马分别有哪些（★）
+### Tomcat和Spring内存马分别有哪些（★）
 
 Tomcat内存马有：Filter型，Servlet型，Listener型
 
@@ -10,7 +10,7 @@ Java Agent内存马：这种方式不仅限于`Tomcat`或`Spring`
 
 
 
-- Servlet/Filter内存马查杀手段是怎样的（★★★）
+### Servlet/Filter内存马查杀手段是怎样的（★★★）
 
 直接能想到的办法是利用Java Agent遍历所有JVM中的class，判断是否是内存马
 
@@ -20,7 +20,7 @@ Java Agent内存马：这种方式不仅限于`Tomcat`或`Spring`
 
 
 
-- Filter内存马查杀时候有什么明显特征吗（★★★）
+### Filter内存马查杀时候有什么明显特征吗（★★★）
 
 首先是类名可能是恶意的，或者包名和项目名不符，可以一眼看出
 
@@ -30,7 +30,7 @@ Java Agent内存马：这种方式不仅限于`Tomcat`或`Spring`
 
 
 
-- 如何实现无法删除的Servlet/Filter内存马（★★★★）
+### 如何实现无法删除的Servlet/Filter内存马（★★★★）
 
 有一种思路是在`destroy`方法中加入再注册内存马的代码，但并不是所有删除方式都会触发`destroy`方法
 
@@ -38,7 +38,7 @@ Java Agent内存马：这种方式不仅限于`Tomcat`或`Spring`
 
 
 
-- 内存马如何持久化（★★★）
+### 内存马如何持久化（★★★）
 
 内存马持久化这个问题必须要往本地写文件
 
@@ -48,18 +48,18 @@ Java Agent内存马：这种方式不仅限于`Tomcat`或`Spring`
 
 
 
-- 内存马持久化写字节码方式除了`@Filter`标签还有什么办法（★★★）
+### 内存马持久化写字节码方式除了`@Filter`标签还有什么办法（★★★）
 使用`ServletContainerInitializer`用于在容器启动阶段注册三大组件，取代`web.xml`配置。其中`onStartup`方法会在`Tomcat`中间件重启加载当前`webapp`会优先执行这个方法。通过改方法，我们可以注册一个`webshell`的`filter`
 
 
 
-- Java Agent内存马的查杀（★★★）
+### Java Agent内存马的查杀（★★★）
 
 网上师傅提到用`sa-jdi.jar`工具来做，这是一个JVM性能检测工具，可以dump出JVM中可能有问题的Class文件，尤其重点关注`HttpServletr.service`方法，这是Agent内存马常用的手段
 
 
 
-- 如果有一个陌生的框架你如何挖内存马（★★★）
+### 如果有一个陌生的框架你如何挖内存马（★★★）
 
 核心是找到类似`Tomcat`和`Spring`中的`Context`对象，然后尝试从其中获取`request`和`response`对象以实现内存马的功能。
 

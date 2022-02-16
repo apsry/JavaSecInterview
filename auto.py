@@ -13,7 +13,7 @@ for i in range (0,len(lines)):
         temp_lines = temp.readlines()
         total = 0
         for q in temp_lines:
-            if q.startswith("-"):
+            if q.startswith("###"):
                 total = total + 1
         p = line.split("-")[0]
         s = line.split("个]")[1]

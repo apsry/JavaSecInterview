@@ -1,30 +1,30 @@
 # Fastjson
 
-- 使用`JSON.parse()`和`JSON.parseObject()`的不同（★）
+### 使用`JSON.parse()`和`JSON.parseObject()`的不同（★）
 
 前者会在JSON字符串中解析字符串获取`@type`指定的类，后者则会直接使用参数中的`class`，并且对应类中所有`getter`和`setter`都会被调用
 
 
 
-- 什么情况下反序列化过程会反射调用`getter`（★）
+### 什么情况下反序列化过程会反射调用`getter`（★）
 
 符合`getter`规范的情况且不存在`setter`
 
 
 
-- 如果不存在`setter`和`getter`方法可以反射设置值吗（★）
+### 如果不存在`setter`和`getter`方法可以反射设置值吗（★）
 
 需要服务端开启`Feature.SupportNonPublicFiel`参数，实战无用
 
 
 
-- Fastjson在反序列化`byte[]`类型的属性时会做什么事情（★）
+### Fastjson在反序列化`byte[]`类型的属性时会做什么事情（★）
 
 将会在反序列化时候进行`base64`编码
 
 
 
-- 谈谈常见的几种Payload（★★★）
+### 谈谈常见的几种Payload（★★★）
 
 首先是最常见的`JdbcRowSetImpl`利用`JDNI`注入方式触发，需要出网
 
@@ -36,21 +36,21 @@
 
 
 
-- 是否存在不出网的Fastjson利用方式（★★★）
+### 是否存在不出网的Fastjson利用方式（★★★）
 
 第一种是`TemplatesImpl`类加载字节码做到不出网利用，但需要开启特殊参数实战鸡肋
 
-第二种方式是服务端存在在`tomcat-dbcp.jar`情况下，使用`BasicDataSource`配合`BCEL`可实现不出网`RCE`
+第二种方式是服务端存在在`tomcat###dbcp.jar`情况下，使用`BasicDataSource`配合`BCEL`可实现不出网`RCE`
 
 
 
-- 谈谈1.2.47版本之前各个小版本的绕过（★★★）
+### 谈谈1.2.47版本之前各个小版本的绕过（★★★）
 
 首先是利用解析问题可以加括号或大写L绕过低版本，高版本利用了哈希黑名单，之所以要哈希是因为防止黑客进行分析。但黑名单还是被破解了，有师傅找到可以绕过了类。在1.2.47版本中利用缓存绕过
 
 
 
-- Fastjson应该如何探测（★★）
+### Fastjson应该如何探测（★★）
 
 使用`dnslog`做检测是最常见的方式，利用`java.net.Inet[4][6]Address`或`java.net.InetSocketAddress`或`java.net.URL`类，之所以使用这三个因为不在黑名单中，可以直接检测
 
@@ -60,7 +60,7 @@
 
 
 
-- 谈谈1.2.68版本的绕过（★★）
+### 谈谈1.2.68版本的绕过（★★）
 
 1.2.68之前的66和67可以利用`JNDI`相关类，比如`Shiro`的`JndiObjectFactory`和`ignite`项目的类
 
@@ -72,7 +72,7 @@
 
 
 
-- 谈谈Fastjson的WAF Bypass手段（★★★）
+### 谈谈Fastjson的WAF Bypass手段（★★★）
 
 Fastjson默认会去除键值外的空格、\b、\n、\r、\f等字符，同时还会自动将键值进行`unicode`与十六进制解码
 
@@ -82,14 +82,14 @@ Fastjson默认会去除键值外的空格、\b、\n、\r、\f等字符，同时�
 
 
 
-- 除了RCE还能有什么利用（★★★）
+### 除了RCE还能有什么利用（★★★）
 
 信息泄露或者ReDoS，参考下方Payload
 
 ```json
 {
     "regex":{
-        "$ref":"$[\blue = /\^[a-zA-Z]+(([a-zA-Z ])?[a-zA-Z]*)*$/]"
+        "$ref":"$[\blue = /\^[a###zA###Z]+(([a###zA###Z ])?[a###zA###Z]*)*$/]"
     },
     "blue":"aaaaaaaaaaaaaaaaaaaaaaaaaaaa!"
 }
@@ -108,12 +108,12 @@ Fastjson默认会去除键值外的空格、\b、\n、\r、\f等字符，同时�
 
 
 
-- 是否了解自动挖掘Fastjson利用链的方式（★★★★）
+### 是否了解自动挖掘Fastjson利用链的方式（★★★★）
 
 利用链主要集中在`getter`和`setter`方法中，如果`getter`或者`setter`的方法中存在一些危险操作比如`JNDI`查询，如果参数可控就可以导致`JNDI`注入
 
 简单来说，直接搜对应项目中`JNDI`的`lookup`方法，可以基于`ASM`解压分析`Jar`包，这种半自动结合人工审核的方式其实很好用（之前挖到过几个）
 
-进一步来说，全自动的方式可以使用`codeql`或`gadget-inspector`工具来做，主要是加入了污点传递，分析`getter/setter`参数如何传递到`lookup`
+进一步来说，全自动的方式可以使用`codeql`或`gadget###inspector`工具来做，主要是加入了污点传递，分析`getter/setter`参数如何传递到`lookup`
 
 关闭全自动分析原理，一般面试官不会问太深入，因为可能涉及到静态分析相关的技术，普通安服崽的面试不会太过深入，如果是实验室可能需要再学习一下
