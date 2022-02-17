@@ -51,6 +51,7 @@ Java Agent内存马：这种方式不仅限于`Tomcat`或`Spring`
 
 
 ### 内存马持久化写字节码方式除了`@Filter`标签还有什么办法（★★★）
+
 使用`ServletContainerInitializer`用于在容器启动阶段注册三大组件，取代`web.xml`配置。其中`onStartup`方法会在`Tomcat`中间件重启加载当前`webapp`会优先执行这个方法。通过改方法，我们可以注册一个`webshell`的`filter`
 
 
@@ -63,13 +64,22 @@ Java Agent内存马：这种方式不仅限于`Tomcat`或`Spring`
 
 ### Java Agent内存马的查杀的难点是什么（★★★★）
 
-JVMTI有
-
 一般Agent内存马会调用`Java Agent`提供的`redefineClass`方法加入内存马
 
 如果想检测，拿到的字节码并不是修改过的字节码，而是原始字节码，因此无法判断某个类是否合法
 
 准确描述：无法获取到被`redefineClass`修改后的字节码，只能获取到被`retransformClass`修改后的字节码
+
+
+### Java Agent内存马通常Hook的点有哪些（★★★★★）
+
+根据JavaEE规范，最先想到的点应该是`javax/servlet/http/HttpServlet#service`
+
+其次是位于`Filter`链头部的`org/apache/catalina/core/ApplicationFilterChain#doFilter`
+
+针对特殊框架可以做特殊处理，例如针对`Spring`的`org/springframework/web/servlet/DispatcherServlet#doService`
+
+还有4ra1n师傅提出关于`Tomcat`自带`Filter`的修改：`org/apache/tomcat/websocket/server/WsFilter#doFilter`
 
 
 
