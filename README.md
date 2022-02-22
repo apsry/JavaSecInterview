@@ -54,6 +54,8 @@ https://gv7.me/
 
 https://github.com/safe6Sec/Fastjson
 
+https://github.com/Firebasky/Java
+
 https://y4er.com/
 
 https://paper.seebug.org/1689/

