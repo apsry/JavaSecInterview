@@ -140,3 +140,39 @@ username[#this.getClass().forName("java.lang.Runtime").getRuntime().exec("calc.e
 开一个`HTTP Server`保存恶意SQL语句，这是一个执行命令的函数，设置属性`spring.datasource.data`为该地址，重启后设置生效
 
 组件中的`org.springframework.boot.autoconfigure.jdbc.DataSourceInitializer`使用`runScripts`方法执行请求`URL`内容中的`SQL`代码，造成`RCE`漏洞
+
+
+
+### 谈谈最新的Spring Cloud Gateway SPEL的RCE漏洞（★★★）
+
+本质还是`SPEL`表达式，本来这是一个需要修改配置文件导致的鸡肋`RCE`漏洞
+
+但因为`Gateway`提供了`Actuator`相关的`API`可以动态地注册`Filter`，而在注册的过程中可以设置`SPEL`表达式
+
+实战利用程度可能不高，目标未必开着`Actuator`接口，就算开放也不一定可以正常访问注册`Filter`的接口
+
+
+
+### 最新的Spring Cloud Gateway SPEL的RCE漏洞可以回显吗（★★★★）
+
+P牛在漏洞爆出的凌晨就发布了相关的环境和POC
+
+参考P牛的回显代码：在相应头里面添加一个新的头，利用工具类把执行回显写入
+
+```json
+{
+    "name": "AddResponseHeader",
+    "args": {
+        "value": "#{new java.lang.String(T(org.springframework.util.StreamUtils).copyToByteArray(T(java.lang.Runtime).getRuntime().exec(new String[]{\"whoami\"}).getInputStream()))}",
+        "name": "cmd123"
+    }
+}
+```
+
+
+
+### 最新的Spring Cloud Gateway SPEL的RCE漏洞如何修复的（★★）
+
+参考很多`SPEL`漏洞的修复手段，默认情况使用`StandardContext`可以执行`Runtime.getRuntime().exec()`这样的危险方法
+
+修复是重写一个`GatewayContext`用来执行`SPEL`，这个`context`的效果是只能执行有限的操作
