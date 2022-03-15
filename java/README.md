@@ -263,3 +263,27 @@ jdbc:mysql://attacker/db?queryInterceptors=com.mysql.cj.jdbc.interceptors.Server
 通过设置参数`java.security.policy`指定`policy`以提权；反射调用`setSecurityManager`修改`Security Manager`以绕过；自定义`ClassLoader`并设置`ProtectionDomain`里面的权限初始化为所有权限以绕过；由于`native`方法不受`Java Security Manager`管控，所以可以调用这些方法绕过
 
 
+
+### 简单谈谈类加载的过程（★★）
+
+首先是由`C/C++`编写的`Bootstrap ClassLoader`用于加载`rt.jar`等核心包
+
+然后是`Extension ClassLoader`加载`JDK`中`Ext`目录的包，可以加入自定义的包
+
+接着是`Application Classloader`加载`CLASSPATH`中的类，项目中的类都是由该类加载器加载完成的
+
+最后是自定义类加载器，继承`ClassLoader`类重写`findClass`方法，在`Webshell`中有应用
+
+
+
+### 简单谈谈双亲委派（★）
+
+当某个类加载器需要加载某个`class`文件时，首先把这个任务委托给他的上级类加载器，递归这个操作，如果上级的类加载器没有加载，自己才会去加载这个类
+
+父类加载器一层一层往下分配任务，如果子类加载器能加载，则加载此类，如果将加载任务分配至系统类加载器也无法加载此类，则抛出异常
+
+
+
+### 双亲委派主要作用是什么（★★）
+
+最主要的作用是保证系统类的安全，基础类不会被自定义类加载器破坏和篡改，其次防止重复加载可以提高效率

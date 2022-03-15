@@ -20,9 +20,9 @@
 
 ## 分类
 
-当前问题总数：87
+当前问题总数：90
 
-[Java本身的安全问题 - 19个](https://github.com/4ra1n/JavaSecInterview/tree/master/java)
+[Java本身的安全问题 - 22个](https://github.com/4ra1n/JavaSecInterview/tree/master/java)
 
 [Shiro框架相关的安全问题 - 8个](https://github.com/4ra1n/JavaSecInterview/tree/master/shiro)
 
