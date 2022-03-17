@@ -98,3 +98,9 @@ Java Agent内存马：这种方式不仅限于`Tomcat`或`Spring`
 可以从常见的类名入手：Requst、ServletRequest、RequstGroup、RequestInfo、RequestGroupInfo等等
 
 可以参考c0ny1师傅的`java-object-searcher`项目，半自动搜索`request`对象
+
+
+
+### 是否了解Spring Cloud Gateway如何注入内存马（★★★★）
+
+参考`c0ny1`师傅的文章，由于`Spring Cloud Gateway`并不基于`Tomcat`而是基于`Netty`框架，需要构造一个`handler`用作内存马。另外的思路是构造上层的内存马，也就是基于`Spring`的内存马，向`RequestMappingHandlerMapping`中注入新的映射。具体代码使用到了`Sping`的一些工具类，在`SPEL`中反射调用了`defineClass`以达到执行代码的效果

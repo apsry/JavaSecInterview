@@ -40,7 +40,7 @@
 
 第一种是`TemplatesImpl`类加载字节码做到不出网利用，但需要开启特殊参数实战鸡肋
 
-第二种方式是服务端存在在`tomcat###dbcp.jar`情况下，使用`BasicDataSource`配合`BCEL`可实现不出网`RCE`
+第二种方式是服务端存在在`tomcat-dbcp.jar`情况下，使用`BasicDataSource`配合`BCEL`可实现不出网`RCE`
 
 
 
@@ -89,7 +89,7 @@ Fastjson默认会去除键值外的空格、\b、\n、\r、\f等字符，同时�
 ```json
 {
     "regex":{
-        "$ref":"$[\blue = /\^[a###zA###Z]+(([a###zA###Z ])?[a###zA###Z]*)*$/]"
+        "$ref":"$[\blue = /\^[a-zA-Z]+(([a-zA-Z ])?[a-zA-Z]*)*$/]"
     },
     "blue":"aaaaaaaaaaaaaaaaaaaaaaaaaaaa!"
 }
@@ -114,6 +114,6 @@ Fastjson默认会去除键值外的空格、\b、\n、\r、\f等字符，同时�
 
 简单来说，直接搜对应项目中`JNDI`的`lookup`方法，可以基于`ASM`解压分析`Jar`包，这种半自动结合人工审核的方式其实很好用（之前挖到过几个）
 
-进一步来说，全自动的方式可以使用`codeql`或`gadget###inspector`工具来做，主要是加入了污点传递，分析`getter/setter`参数如何传递到`lookup`
+进一步来说，全自动的方式可以使用`codeql`或`gadget-inspector`工具来做，主要是加入了污点传递，分析`getter/setter`参数如何传递到`lookup`
 
 关闭全自动分析原理，一般面试官不会问太深入，因为可能涉及到静态分析相关的技术，普通安服崽的面试不会太过深入，如果是实验室可能需要再学习一下
