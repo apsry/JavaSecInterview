@@ -153,7 +153,7 @@ username[#this.getClass().forName("java.lang.Runtime").getRuntime().exec("calc.e
 
 
 
-### 最新的Spring Cloud Gateway SPEL的RCE漏洞可以回显吗（★★★★）
+### Spring Cloud Gateway SPEL的RCE漏洞可以回显吗（★★★★）
 
 P牛在漏洞爆出的凌晨就发布了相关的环境和POC
 
@@ -171,8 +171,34 @@ P牛在漏洞爆出的凌晨就发布了相关的环境和POC
 
 
 
-### 最新的Spring Cloud Gateway SPEL的RCE漏洞如何修复的（★★）
+### Spring Cloud Gateway SPEL的RCE漏洞如何修复的（★★）
 
 参考很多`SPEL`漏洞的修复手段，默认情况使用`StandardContext`可以执行`Runtime.getRuntime().exec()`这样的危险方法
 
-修复是重写一个`GatewayContext`用来执行`SPEL`，这个`context`的效果是只能执行有限的操作
+修复是重写一个`GatewayContext`用来执行`SPEL`，这个`context`的底层是`SimpleEvaluationContext`只能执行有限的操作
+
+
+
+### Spring Cloud Function RCE漏洞了解吗（★★）
+
+这也是`Spring Cloud`种的一个组件，不过并不常用
+
+利用方式是某个请求头支持`SpEL`的格式并且会执行
+
+```http
+POST / HTTP/1.1
+...
+spring.cloud.function.routing-expression: SPEL
+```
+
+修复方案比较简单，使用`SimpleEvaluationContext`即可
+
+
+
+### Spring Framework 拒绝服务漏洞了解吗（★★）
+
+参考先知社区`4ra1n`师傅的文章：https://xz.aliyun.com/t/11114
+
+危害不大，但影响较广，所有能够执行`SpEL`的框架，都可以通过初始化巨大的数组造成拒绝服务漏洞
+
+修复方案是限制`SpEL`种数组初始化的长度（一般业务也不可能在`SpEL`种初始化很大的数组）
