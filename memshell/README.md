@@ -104,35 +104,3 @@ Java Agent内存马：这种方式不仅限于`Tomcat`或`Spring`
 ### 是否了解Spring Cloud Gateway如何注入内存马（★★★★）
 
 参考`c0ny1`师傅的文章，由于`Spring Cloud Gateway`并不基于`Tomcat`而是基于`Netty`框架，需要构造一个`handler`用作内存马。另外的思路是构造上层的内存马，也就是基于`Spring`的内存马，向`RequestMappingHandlerMapping`中注入新的映射。具体代码使用到了`Sping`的一些工具类，在`SPEL`中反射调用了`defineClass`以达到执行代码的效果
-
-
-
-### 谈谈Spring RCE的基本原理（★★★★）
-
-该漏洞与很久以前的`SpringMVC`对象绑定漏洞有关，曾经的修复方案是：如果攻击者尝试以`class.classloader`获取任意`class`对象的`loader`时跳过
-
-这里的对象绑定是指将请求中的参数绑定到控制器（Controller）方法中的参数对象的成员变量，例如通过`username`和`password`等参数绑定到`User`对象
-
-由于在`JDK9`中加入了模块`module`功能，可以通过`class.module.classLoader`得到某`class`对应的`classloader`进而利用
-
-在`Tomcat`环境下拿到的`classloader`对象中包含了`context`，进而通过`pipeline`拿到`AccessLogValue`对象，该类用于处理`Tomcat`访问日志相关。通过修改其中的字段信息，可以将`webshell`写入指定目录下的指定文件中，以达到`RCE`的目的
-
-
-
-### 谈谈Spring RCE的利用条件（★★★）
-
-1. JDK9+（核心是利用到`module`功能）
-2. Tomcat（为了拿到可利用的`Classloader`对象）
-3. 必须存在对象绑定，如果是`String`和`int`等基本类型参数则不生效
-
-
-
-### Spring RCE为什么在SpringBoot中不生效（★★★★）
-
-因为在`SpringBoot`中拿到的`classloader`是`AppClassloader`类，该类不存在无参的`getResources`方法且没有其他可操作的空间，所以无法利用
-
-
-
-### 谈谈Spring RCE的修复（★★★）
-
-当`beanClass`为`Class`时只允许参数名为`name`并以`Name`结尾且属性返回类型不能为`Classloader`及`Classloader`子类

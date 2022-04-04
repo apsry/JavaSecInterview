@@ -30,9 +30,9 @@
 
 [Log4j2组件相关的安全问题 - 10个](https://github.com/4ra1n/JavaSecInterview/tree/master/log4j2)
 
-[Spring框架相关的安全问题 - 21个](https://github.com/4ra1n/JavaSecInterview/tree/master/spring)
+[Spring框架相关的安全问题 - 25个](https://github.com/4ra1n/JavaSecInterview/tree/master/spring)
 
-[内存马专题 - 16个](https://github.com/4ra1n/JavaSecInterview/tree/master/memshell)
+[内存马专题 - 12个](https://github.com/4ra1n/JavaSecInterview/tree/master/memshell)
 
 [反序列化CC链专题 - 8个](https://github.com/4ra1n/JavaSecInterview/tree/master/cc)
 

@@ -202,3 +202,35 @@ spring.cloud.function.routing-expression: SPEL
 危害不大，但影响较广，所有能够执行`SpEL`的框架，都可以通过初始化巨大的数组造成拒绝服务漏洞
 
 修复方案是限制`SpEL`种数组初始化的长度（一般业务也不可能在`SpEL`种初始化很大的数组）
+
+
+
+### 谈谈Spring RCE的基本原理（★★★★）
+
+该漏洞与很久以前的`SpringMVC`对象绑定漏洞有关，曾经的修复方案是：如果攻击者尝试以`class.classloader`获取任意`class`对象的`loader`时跳过
+
+这里的对象绑定是指将请求中的参数绑定到控制器（Controller）方法中的参数对象的成员变量，例如通过`username`和`password`等参数绑定到`User`对象
+
+由于在`JDK9`中加入了模块`module`功能，可以通过`class.module.classLoader`得到某`class`对应的`classloader`进而利用
+
+在`Tomcat`环境下拿到的`classloader`对象中包含了`context`，进而通过`pipeline`拿到`AccessLogValue`对象，该类用于处理`Tomcat`访问日志相关。通过修改其中的字段信息，可以将`webshell`写入指定目录下的指定文件中，以达到`RCE`的目的
+
+
+
+### 谈谈Spring RCE的利用条件（★★★）
+
+1. JDK9+（核心是利用到`module`功能）
+2. Tomcat（为了拿到可利用的`Classloader`对象）
+3. 必须存在对象绑定，如果是`String`和`int`等基本类型参数则不生效
+
+
+
+### Spring RCE为什么在SpringBoot中不生效（★★★★）
+
+因为在`SpringBoot`中拿到的`classloader`是`AppClassloader`类，该类不存在无参的`getResources`方法且没有其他可操作的空间，所以无法利用
+
+
+
+### 谈谈Spring RCE的修复（★★★）
+
+当`beanClass`为`Class`时只允许参数名为`name`并以`Name`结尾且属性返回类型不能为`Classloader`及`Classloader`子类
