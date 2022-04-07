@@ -8,18 +8,64 @@
 
 项目目标：完全掌握本项目后进轻松大厂
 
-计划定期更新，从基础到各种实战问题，打造齐全的Java安全面试题库
-
-最低难度★   最高难度★★★★★
-
-
+计划定期更新，从基础到各种实战问题，打造齐全的Java安全面试题库（包含问题和详细的答案）
 
 作者技术水平有限，难免有错误之处，欢迎师傅们提出ISSUE和PR
 
+## 难度
+
+最低难度★   最高难度★★★★★
+
+个人认为安服崽需要掌握★-★★难度的问题，红队和安全研究员需要全部掌握
+
 ## 分类
 
-[Java本身的安全问题 - 12个](https://github.com/4ra1n/JavaSecInterview/tree/master/java)
+当前问题总数：97
 
-[Shiro框架相关的安全问题 - 7个](https://github.com/4ra1n/JavaSecInterview/tree/master/shiro)
+[Java本身的安全问题 - 22个](https://github.com/4ra1n/JavaSecInterview/tree/master/java)
 
-[Log4j2组件相关的安全问题 - 6个](https://github.com/4ra1n/JavaSecInterview/tree/master/log4j2)
+[Shiro框架相关的安全问题 - 8个](https://github.com/4ra1n/JavaSecInterview/tree/master/shiro)
+
+[Fastjson组件相关的安全问题 - 12个](https://github.com/4ra1n/JavaSecInterview/tree/master/fastjson)
+
+[Log4j2组件相关的安全问题 - 10个](https://github.com/4ra1n/JavaSecInterview/tree/master/log4j2)
+
+[Spring框架相关的安全问题 - 25个](https://github.com/4ra1n/JavaSecInterview/tree/master/spring)
+
+[内存马专题 - 12个](https://github.com/4ra1n/JavaSecInterview/tree/master/memshell)
+
+[反序列化CC链专题 - 8个](https://github.com/4ra1n/JavaSecInterview/tree/master/cc)
+
+## 参考
+
+https://github.com/LandGrey/SpringBootVulExploit
+
+https://github.com/feihong-cs/Java-Rce-Echo/
+
+https://threedr3am.github.io/
+
+https://xz.aliyun.com/t/7740
+
+https://xz.aliyun.com/t/7307
+
+https://www.cnpanda.net/
+
+https://gv7.me/
+
+https://github.com/safe6Sec/Fastjson
+
+https://github.com/Firebasky/Java
+
+https://y4er.com/
+
+https://paper.seebug.org/1689/
+
+## 其他
+
+1. 师傅们如果需要提交面试题，请参考已有的格式
+
+2. 其中的`auto.py`文件是根据类型自动统计数量并生成新的`README.md`页面
+
+## Star
+
+![](https://starchart.cc/4ra1n/JavaSecInterview.svg)
